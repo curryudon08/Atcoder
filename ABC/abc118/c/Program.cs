@@ -11,12 +11,22 @@ namespace c
             var n = long.Parse(Console.ReadLine());
             var a = Console.ReadLine().Split().Select(i => long.Parse(i)).ToArray();
 
-            while(a.Length > 1){
-                var min = a.Min();
-                a = a.Select(i => i % min).Where(i => i != 0).ToArray();
+            var x = a[0];
+            for(var i = 1; i < n; i++){
+                x = Gcd(a[i], x);
             }
 
-            Console.WriteLine(a[0]);
+            Console.WriteLine(x);
+        }
+
+        static long Gcd(long m, long n)
+        {
+	        while (m % n != 0){
+        		var temp = n;
+		        n = m % n;
+		        m = temp;
+	        }
+        	return n;
         }
     }
 }
